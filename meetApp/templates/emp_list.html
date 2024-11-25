@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+</head>
+<body>
+    <h1>Employee List</h1>
+    <a href="{% url 'create_emp'  %}">Add Employee</a>
+
+    <ul>
+        {% for employee in employees %}
+            <li>
+                <strong>{{ employee.first_name }} {{ employee.last_name }}</strong><br>
+                <em>{{ employee.email }}</em><br>
+                <p>{{ employee.emp_number }}</p>
+
+                {% if employees.image %}
+
+
+                    <!-- Displaying the student's image -->
+                    <img src="{{ employees.image.url }}" alt="{{ employees.first_name }}'s image" width="100">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+
+                <a href="{% url 'edit_emp' employees.id %}">Edit</a>
+                <a href="{% url 'delete_emp' employees.id %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
